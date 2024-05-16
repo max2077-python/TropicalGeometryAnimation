@@ -131,6 +131,36 @@ class TotalScene(Scene):
         self.play(Write(theorem1_1), Write(theorem1_2))
         self.wait(20)
         self.clear()
+        
+        halfspace_text = Tex(r"A ", r"tropical affine halfspace ", r"is a set of vectors veriying an inequality constraint of the form").scale(0.8)
+        halfspace_text[1].set_color(LOGO_BLUE)
+        halfspace_math = MathTex(r"\bigoplus_{i} a_i \otimes x_i \oplus a_0 \leq \bigoplus_i b_i \otimes x_i \oplus b_0").scale(0.8)
+        halfspace_math[0].set_color(LOGO_BLUE)
+
+        VGroup(halfspace_text, halfspace_math).arrange(DOWN)
+
+        tropical_text = Tex(r"A ", r"tropical polyhedron ", r"is the intersection of a finite number of tropical affine halspaces").scale(0.8)
+        tropical_text[1].set_color(LOGO_BLUE)
+        tropical_math = MathTex(r"Ax \oplus a_0 \leq Bx \oplus b_0")
+        tropical_math[0].set_color(LOGO_BLUE)
+
+        VGroup(tropical_text, tropical_math).arrange(DOWN)
+        
+        self.play(Write(halfspace_text), Write(halfspace_math))
+        self.wait(5)
+
+        new_position_halfspace = halfspace_text.get_center() + UP * 2
+        new_position_halfspace2 = halfspace_math.get_center() + UP * 2
+        self.play(halfspace_text.animate.move_to(new_position_halfspace))
+        self.play(halfspace_math.animate.move_to(new_position_halfspace2))
+        self.wait()
+
+        new_position_tropical = tropical_text.get_center() + DOWN
+        new_position_tropical2 = tropical_math.get_center() + DOWN
+        self.play(tropical_math.animate.move_to(new_position_tropical2))
+        self.play(tropical_text.animate.move_to(new_position_tropical))
+        self.wait(30)
+        self.clear()
 
         # First, Euclidean geometry
         title1 = Tex(r"Let's take the following ", r"affine halfspace")
