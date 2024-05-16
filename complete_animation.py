@@ -139,7 +139,7 @@ class TotalScene(Scene):
 
         VGroup(halfspace_text, halfspace_math).arrange(DOWN)
 
-        tropical_text = Tex(r"A ", r"tropical polyhedron ", r"is the intersection of a finite number of tropical affine halspaces").scale(0.8)
+        tropical_text = Tex(r"A ", r"tropical polyhedron ", r"is the intersection of a finite number of tropical affine halfspaces").scale(0.8)
         tropical_text[1].set_color(LOGO_BLUE)
         tropical_math = MathTex(r"Ax \oplus a_0 \leq Bx \oplus b_0")
         tropical_math[0].set_color(LOGO_BLUE)
