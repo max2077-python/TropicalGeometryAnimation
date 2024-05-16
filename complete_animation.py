@@ -131,28 +131,70 @@ class TotalScene(Scene):
         self.play(Write(theorem1_1), Write(theorem1_2))
         self.wait(20)
         self.clear()
-        
-        halfspace_text = Tex(r"A ", r"tropical affine halfspace ", r"is a set of vectors veriying an inequality constraint of the form").scale(0.8)
+
+        halfspace_text = Tex(r"A ", r"tropical halfspace ", r"is a set of vectors verifying an inequality constraint of the form").scale(0.8)
         halfspace_text[1].set_color(LOGO_BLUE)
-        halfspace_math = MathTex(r"\bigoplus_{i} a_i \otimes x_i \oplus a_0 \leq \bigoplus_i b_i \otimes x_i \oplus b_0").scale(0.8)
+        halfspace_math = MathTex(r"\bigoplus_{i} a_i \otimes x_i \leq \bigoplus_i b_i \otimes x_i").scale(0.8)
         halfspace_math[0].set_color(LOGO_BLUE)
 
         VGroup(halfspace_text, halfspace_math).arrange(DOWN)
 
-        tropical_text = Tex(r"A ", r"tropical polyhedron ", r"is the intersection of a finite number of tropical affine halfspaces").scale(0.8)
+        self.play(Write(halfspace_text), Write(halfspace_math))
+        self.wait(5)
+
+        new_position_halfspace = affine_halfspace_text.get_center() + UP * 2
+        new_position_halfspace2 = affine_halfspace_math.get_center() + UP * 2
+        self.play(halfspace_text.animate.move_to(new_position_halfspace))
+        self.play(halfspace_math.animate.move_to(new_position_halfspace2))
+        self.wait()
+
+        new_position_cone = cone_text.get_center() + DOWN
+        new_position_cone2 = cone_math.get_center() + DOWN
+        self.play(cone_math.animate.move_to(new_position_cone2))
+        self.play(cone_text.animate.move_to(new_position_cone))
+        self.wait(30)
+
+        self.play(Uncreate(halfspace_text), Uncreate(halfspace_math), Uncreate(cone_text), Uncreate(cone_math))
+        self.wait(2)
+
+        polytope_text = Tex(r"A ", r"tropical polytope ", r"is a bounded ", r"tropical polyhedron", r".")
+        polytope_text[1].set_color(LOGO_BLUE)
+        polytope_text[3].set_color(LOGO_BLUE)
+        
+        self.play(Write(polytope_text))
+        self.wait(5)
+        self.play(Uncreate(polytope_text))
+
+        cone_text = Tex(r"A ", r"tropical polyhedral cone ", r"is the intersection of a finite number of ", r"tropical affine halfspaces").scale(0.8)
+        cone_text[1].set_color(LOGO_BLUE)
+        cone_text[3].set_color(LOGO_BLUE)
+        cone_math = MathTex(r"Ax \leq Bx").scale(0.8)
+        cone_math[0].set_color(LOGO_BLUE)
+
+        VGroup(cone_text, cone_math).arrange(DOWN)
+        
+        affine_halfspace_text = Tex(r"A ", r"tropical affine halfspace ", r"is a set of vectors veriying an inequality constraint of the form").scale(0.8)
+        affine_halfspace_text[1].set_color(LOGO_BLUE)
+        affine_halfspace_math = MathTex(r"\bigoplus_{i} a_i \otimes x_i \oplus a_0 \leq \bigoplus_i b_i \otimes x_i \oplus b_0").scale(0.8)
+        affine_halfspace_math[0].set_color(LOGO_BLUE)
+
+        VGroup(affine_halfspace_text, affine_halfspace_math).arrange(DOWN)
+
+        tropical_text = Tex(r"A ", r"tropical polyhedron ", r"is the intersection of a finite number of ", r"tropical affine halfspaces").scale(0.8)
         tropical_text[1].set_color(LOGO_BLUE)
+        tropical_text[3].set_color(LOGO_BLUE)
         tropical_math = MathTex(r"Ax \oplus a_0 \leq Bx \oplus b_0")
         tropical_math[0].set_color(LOGO_BLUE)
 
         VGroup(tropical_text, tropical_math).arrange(DOWN)
         
-        self.play(Write(halfspace_text), Write(halfspace_math))
+        self.play(Write(affine_halfspace_text), Write(affine_halfspace_math))
         self.wait(5)
 
-        new_position_halfspace = halfspace_text.get_center() + UP * 2
-        new_position_halfspace2 = halfspace_math.get_center() + UP * 2
-        self.play(halfspace_text.animate.move_to(new_position_halfspace))
-        self.play(halfspace_math.animate.move_to(new_position_halfspace2))
+        new_position_affine_halfspace = affine_halfspace_text.get_center() + UP * 2
+        new_position_affine_halfspace2 = affine_halfspace_math.get_center() + UP * 2
+        self.play(affine_halfspace_text.animate.move_to(new_position_affine_halfspace))
+        self.play(affine_halfspace_math.animate.move_to(new_position_affine_halfspace2))
         self.wait()
 
         new_position_tropical = tropical_text.get_center() + DOWN
