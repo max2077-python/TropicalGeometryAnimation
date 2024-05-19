@@ -78,7 +78,7 @@ class TotalScene1(Scene):
         new_position2 = blist.get_center() + DOWN
         self.play(blist.animate.move_to(new_position2))
         self.play(interpretation1.animate.move_to(new_position1))
-        self.wait(10)
+        self.wait(16)
 
         self.play(Uncreate(MWtheorem1), Uncreate(interpretation1), Uncreate(blist))
         self.wait()
@@ -89,13 +89,13 @@ class TotalScene1(Scene):
         self.wait()
 
         self.play(Write(geometry2), Write(blist2))
-        self.wait(32)
+        self.wait(26)
         self.clear()
 
         text2 = Tex(r"Let us define the ", r"Tropical Minkowski sum")
         text2[1].set_color(LOGO_BLUE)
         
-        text3 = Tex(r"Given two sets $V, R$ of $\mathbb{R}^n_{max}$, the ", r"Minkowski sum ", r"of $V, R$ is the set").scale(0.8)
+        text3 = Tex(r"Given two sets $V, R$ of $\mathbb{R}^n_{max}$, the ", r" Tropical Minkowski sum ", r"of $V, R$ is the set").scale(0.8)
         text3[1].set_color(LOGO_BLUE)
         set1 = MathTex(r"V + R := \{x \in \mathbb{R}^n_{max} : x = v \oplus r \text{ for } v \in V, r \in R\}").scale(0.8)
 
@@ -118,7 +118,7 @@ class TotalScene1(Scene):
         self.wait()
 
         self.play(Write(text3), Write(set1))
-        self.wait(22)
+        self.wait(16)
         self.play(Uncreate(text3), Uncreate(set1))
         self.wait()
 
@@ -127,23 +127,31 @@ class TotalScene1(Scene):
         self.play(Uncreate(text4))
 
         self.play(Write(theorem1_1), Write(theorem1_2))
-        self.wait(26)
+        self.wait(24)
         self.clear()
-        
+
 class TotalScene2(Scene):
     def construct(self):
         halfspace_text = Tex(r"A ", r"tropical halfspace ", r"is a set of vectors verifying an inequality constraint of the form").scale(0.8)
         halfspace_text[1].set_color(LOGO_BLUE)
-        halfspace_math = MathTex(r"\bigoplus_{i} a_i \otimes x_i \leq \bigoplus_i b_i \otimes x_i").scale(0.8)
+        halfspace_math = MathTex(r"\bigoplus_{i \in \mathcal{I}} a_i \otimes x_i \leq \bigoplus_{j \in \mathcal{J}} b_j \otimes x_j").scale(0.8)
         halfspace_math[0].set_color(LOGO_BLUE)
 
         VGroup(halfspace_text, halfspace_math).arrange(DOWN)
 
+        cone_text = Tex(r"A ", r"tropical polyhedral cone ", r"is the intersection of a finite number of ", r"tropical affine halfspaces").scale(0.8)
+        cone_text[1].set_color(LOGO_BLUE)
+        cone_text[3].set_color(LOGO_BLUE)
+        cone_math = MathTex(r"\{x \in \mathcal{R}^n_{max} | Ax \leq Bx \}").scale(0.8)
+        cone_math[0].set_color(LOGO_BLUE)
+
+        VGroup(cone_text, cone_math).arrange(DOWN)
+
         self.play(Write(halfspace_text), Write(halfspace_math))
         self.wait(5)
 
-        new_position_halfspace = affine_halfspace_text.get_center() + UP * 2
-        new_position_halfspace2 = affine_halfspace_math.get_center() + UP * 2
+        new_position_halfspace = halfspace_text.get_center() + UP * 2
+        new_position_halfspace2 = halfspace_math.get_center() + UP * 2
         self.play(halfspace_text.animate.move_to(new_position_halfspace))
         self.play(halfspace_math.animate.move_to(new_position_halfspace2))
         self.wait()
@@ -152,30 +160,22 @@ class TotalScene2(Scene):
         new_position_cone2 = cone_math.get_center() + DOWN
         self.play(cone_math.animate.move_to(new_position_cone2))
         self.play(cone_text.animate.move_to(new_position_cone))
-        self.wait(128)
+        self.wait(70)
 
         self.play(Uncreate(halfspace_text), Uncreate(halfspace_math), Uncreate(cone_text), Uncreate(cone_math))
         self.wait(2)
 
-        polytope_text = Tex(r"A ", r"tropical polytope ", r"is a bounded ", r"tropical polyhedron", r".")
+        polytope_text = Tex(r"A ", r"tropical polytope ", r"is a bounded ", r"tropical polyhedron", r".").scale(0.8)
         polytope_text[1].set_color(LOGO_BLUE)
         polytope_text[3].set_color(LOGO_BLUE)
         
         self.play(Write(polytope_text))
         self.wait(10)
         self.play(Uncreate(polytope_text))
-
-        cone_text = Tex(r"A ", r"tropical polyhedral cone ", r"is the intersection of a finite number of ", r"tropical affine halfspaces").scale(0.8)
-        cone_text[1].set_color(LOGO_BLUE)
-        cone_text[3].set_color(LOGO_BLUE)
-        cone_math = MathTex(r"Ax \leq Bx").scale(0.8)
-        cone_math[0].set_color(LOGO_BLUE)
-
-        VGroup(cone_text, cone_math).arrange(DOWN)
         
         affine_halfspace_text = Tex(r"A ", r"tropical affine halfspace ", r"is a set of vectors veriying an inequality constraint of the form").scale(0.8)
         affine_halfspace_text[1].set_color(LOGO_BLUE)
-        affine_halfspace_math = MathTex(r"\bigoplus_{i} a_i \otimes x_i \oplus a_0 \leq \bigoplus_i b_i \otimes x_i \oplus b_0").scale(0.8)
+        affine_halfspace_math = MathTex(r"\bigoplus_{i \in \mathcal{I}} a_i \otimes x_i \oplus a_0 \leq \bigoplus_{j \in \mathcal{J}} b_j \otimes x_j \oplus b_0").scale(0.8)
         affine_halfspace_math[0].set_color(LOGO_BLUE)
 
         VGroup(affine_halfspace_text, affine_halfspace_math).arrange(DOWN)
@@ -183,13 +183,13 @@ class TotalScene2(Scene):
         tropical_text = Tex(r"A ", r"tropical polyhedron ", r"is the intersection of a finite number of ", r"tropical affine halfspaces").scale(0.8)
         tropical_text[1].set_color(LOGO_BLUE)
         tropical_text[3].set_color(LOGO_BLUE)
-        tropical_math = MathTex(r"Ax \oplus a_0 \leq Bx \oplus b_0")
+        tropical_math = MathTex(r"\{x \in \mathcal{R}^n_{max} | A \otimes x \oplus a_0 \leq B \otimes x \oplus b_0 \}")
         tropical_math[0].set_color(LOGO_BLUE)
 
         VGroup(tropical_text, tropical_math).arrange(DOWN)
         
         self.play(Write(affine_halfspace_text), Write(affine_halfspace_math))
-        self.wait(5)
+        self.wait(2)
 
         new_position_affine_halfspace = affine_halfspace_text.get_center() + UP * 2
         new_position_affine_halfspace2 = affine_halfspace_math.get_center() + UP * 2
@@ -201,7 +201,7 @@ class TotalScene2(Scene):
         new_position_tropical2 = tropical_math.get_center() + DOWN
         self.play(tropical_math.animate.move_to(new_position_tropical2))
         self.play(tropical_text.animate.move_to(new_position_tropical))
-        self.wait(80)
+        self.wait(60)
         self.clear()
 
         # First, Euclidean geometry
@@ -332,9 +332,9 @@ class TotalScene2(Scene):
         self.wait()
         
         self.play(FadeIn(halfspace2))
-        self.wait(25)
+        self.wait(20)
         self.clear()
-        
+
 class TotalScene3(Scene):
     def construct(self):
         # First, the linear system
@@ -510,47 +510,7 @@ class TotalScene3(Scene):
             FadeOut(inequality4_2)
         )
         self.play(FadeIn(polyhedron))
-        self.wait(11)
-        self.clear()
-
-        grid2 = NumberPlane(
-            x_range=(-10, 10, 1),
-            y_range=(-6, 6, 1),
-            axis_config={
-            "color": WHITE,  # color of the axes lines
-            "stroke_width": 2,  # thickness of the axes lines
-            "include_ticks": True,  # whether to include tick marks on the axes
-            "include_numbers": True,  # whether to include numbers on the axes
-            "label_direction": DOWN*2,  # direction of the axis labels
-            "font_size": 20,  # font size of the axis labels
-            },
-            background_line_style = {
-                "stroke_opacity": 0.4
-            }
-        )
-
-        polyhedron1 = Polygon(
-            grid2.coords_to_point(-2, 1),
-            grid2.coords_to_point(0, 1),
-            grid2.coords_to_point(0, 0),
-            grid2.coords_to_point(2, 2),
-            grid2.coords_to_point(2, 8),
-            grid2.coords_to_point(-2, 8),
-            fill_color=RED,
-            fill_opacity=0.30,
-            stroke_width=0
-        )
-        
-        border_polyhedron6 = Line([-2, 10, 1], [-2, 1, 1])
-        border_polyhedron6.set_color(RED)
-        border_polyhedron7 = Line([-2, 1, 1], [0, 1, 1])
-        border_polyhedron7.set_color(RED)
-        border_polyhedron8 = Line([0, 1, 1], [0, -8, 1])
-        border_polyhedron8.set_color(RED)
-        border_polyhedron9 = Line([0, 0, 1], [2, 2, 1])
-        border_polyhedron9.set_color(RED)
-        border_polyhedron10 = Line([2, 2, 1], [2, 8, 1])
-        border_polyhedron10.set_color(RED)
+        self.wait(30)
 
         # Pairs of inequalities to get the extreme points
         inequality5 = Line([-2, -10, 1], [-2, 10, 1])
@@ -575,23 +535,9 @@ class TotalScene3(Scene):
         dot_coords3 = [2, 2]
 
         # Create a Dot at the specified coordinates
-        dot1 = Dot(grid2.coords_to_point(*dot_coords1), color=LOGO_GREEN)
-        dot2 = Dot(grid2.coords_to_point(*dot_coords2), color=LOGO_GREEN)
-        dot3 = Dot(grid2.coords_to_point(*dot_coords3), color=LOGO_GREEN)
-
-        # Drawing the grid
-        self.play(FadeIn(grid2))
-
-        self.play(
-            Write(border_polyhedron6),
-            Write(border_polyhedron7),
-            Write(border_polyhedron8),
-            Write(border_polyhedron9),
-            Write(border_polyhedron10)
-        )
-
-        self.play(FadeIn(polyhedron1))
-        self.wait(28)
+        dot1 = Dot(grid1.coords_to_point(*dot_coords1), color=LOGO_GREEN)
+        dot2 = Dot(grid1.coords_to_point(*dot_coords2), color=LOGO_GREEN)
+        dot3 = Dot(grid1.coords_to_point(*dot_coords3), color=LOGO_GREEN)
         
         self.play(FadeIn(inequality5), FadeIn(inequality6_1), FadeIn(inequality6_2))
         self.wait(3)
@@ -630,7 +576,7 @@ class TotalScene3(Scene):
         self.wait(11)
         self.clear()
 
-        end = Tex(r"Thank you for attention")
+        end = Tex(r"Thank you for attention").scale(1.5)
         end.set_color(LOGO_BLUE)
 
         self.play(FadeIn(end))
