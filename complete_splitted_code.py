@@ -134,12 +134,12 @@ class TotalScene2(Scene):
     def construct(self):
         halfspace_text = Tex(r"A ", r"tropical halfspace ", r"is a set of vectors verifying an inequality constraint of the form").scale(0.8)
         halfspace_text[1].set_color(LOGO_BLUE)
-        halfspace_math = MathTex(r"\bigoplus_{i \in \mathcal{I}} a_i \otimes x_i \leq \bigoplus_{j \in \mathcal{J}} b_j \otimes x_j").scale(0.8)
+        halfspace_math = MathTex(r"\bigoplus_{1 \leq i \leq n} a_i \otimes x_i \leq \bigoplus_{1 \leq i \leq n} b_j \otimes x_j").scale(0.8)
         halfspace_math[0].set_color(LOGO_BLUE)
 
         VGroup(halfspace_text, halfspace_math).arrange(DOWN)
 
-        cone_text = Tex(r"A ", r"tropical polyhedral cone ", r"is the intersection of a finite number of ", r"tropical affine halfspaces").scale(0.8)
+        cone_text = Tex(r"A ", r"tropical polyhedral cone ", r"is the intersection of a finite number of ", r"tropical halfspaces").scale(0.8)
         cone_text[1].set_color(LOGO_BLUE)
         cone_text[3].set_color(LOGO_BLUE)
         cone_math = MathTex(r"\{x \in \mathcal{R}^n_{max} | Ax \leq Bx \}").scale(0.8)
@@ -175,7 +175,7 @@ class TotalScene2(Scene):
         
         affine_halfspace_text = Tex(r"A ", r"tropical affine halfspace ", r"is a set of vectors veriying an inequality constraint of the form").scale(0.8)
         affine_halfspace_text[1].set_color(LOGO_BLUE)
-        affine_halfspace_math = MathTex(r"\bigoplus_{i \in \mathcal{I}} a_i \otimes x_i \oplus a_0 \leq \bigoplus_{j \in \mathcal{J}} b_j \otimes x_j \oplus b_0").scale(0.8)
+        affine_halfspace_math = MathTex(r"\bigoplus_{1 \leq i \leq n} a_i \otimes x_i \oplus a_0 \leq \bigoplus_{1 \leq i \leq n} b_j \otimes x_j \oplus b_0").scale(0.8)
         affine_halfspace_math[0].set_color(LOGO_BLUE)
 
         VGroup(affine_halfspace_text, affine_halfspace_math).arrange(DOWN)
@@ -574,6 +574,22 @@ class TotalScene3(Scene):
         self.wait(3)
         self.play(FadeOut(inequality7), FadeOut(inequality8_1), FadeOut(inequality8_2))
         self.wait(11)
+        
+        polytope1 = Line([-2, 1, 1], [0, 1, 1])
+        polytope2 = Line([0, 1, 1], [0, -3.9, 1])
+        polytope3 = Line([0, 0, 1], [2, 2, 1])
+        polytope1.set_color(TEAL_A)
+        polytope2.set_color(TEAL_A)
+        polytope3.set_color(TEAL_A)
+        
+        self.play(FadeIn(polytope1), FadeIn(polytope2), FadeIn(polytope3))
+        self.wait(10)
+        
+        polyhedral_cone1 = Line([0, -3.9, 1], [0, 5, 1])
+        polyhedral_cone1.set_color(TEAL_E)
+        
+        self.play(FadeIn(polyhedral_cone1))
+        self.wait(15)
         self.clear()
 
         end = Tex(r"Thank you for attention").scale(1.5)
