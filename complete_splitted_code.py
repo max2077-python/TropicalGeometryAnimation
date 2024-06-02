@@ -579,20 +579,21 @@ class TotalScene3(Scene):
         self.wait(11)
         
         self.play(FadeIn(vector))
-        self.wait(5)
+        self.wait(6)
+        self.play(FadeOut(vector))
         
         polytope1 = Line([-2, 1, 1], [0, 1, 1])
         polytope2 = Line([0, 1, 1], [0, -3.9, 1])
         polytope3 = Line([0, 0, 1], [2, 2, 1])
-        polytope1.set_color(PURPLE_E)
-        polytope2.set_color(PURPLE_E)
-        polytope3.set_color(PURPLE_E)
+        polytope1.set_color(BLUE_B)
+        polytope2.set_color(BLUE_B)
+        polytope3.set_color(BLUE_B)
         
         self.play(FadeIn(polytope1), FadeIn(polytope2), FadeIn(polytope3))
         self.wait(10)
         
         polyhedral_cone1 = Line([0, -3.9, 1], [0, 5, 1])
-        polyhedral_cone1.set_color(MAROON_E)
+        polyhedral_cone1.set_color(BLUE_E)
         
         self.play(FadeIn(polyhedral_cone1))
         self.wait(30)
