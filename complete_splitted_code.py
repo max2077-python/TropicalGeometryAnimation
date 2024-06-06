@@ -26,7 +26,7 @@ class TotalScene1(Scene):
         self.play(FadeIn(seminar))
         self.play(FadeIn(date))
 
-        self.wait(32)
+        self.wait(30)
         self.clear()
 
         text1 = Tex(r"First, let us do a quick reminder on my presentation.")
@@ -39,7 +39,7 @@ class TotalScene1(Scene):
         interpretation1 = Tex(r"The ", r"Minkowski-Weyl theorem ", r"can be interpreted as:").scale(0.9).next_to(MWtheorem1, DOWN)
         interpretation1[1].set_color(LOGO_BLUE)
         blist = BulletedList(r"Internal description: the linear system describing the polyhedron", 
-                             r"External description: the set of extreme vertices of the polytope and extreme generators of the polyhedral cone", 
+                             r"External description: the set of vertices of the polytope and extreme generators of the polyhedral cone", 
                              height=8,
                              width=9,
                              buff=0.6
@@ -89,19 +89,19 @@ class TotalScene1(Scene):
         self.wait()
 
         self.play(Write(geometry2), Write(blist2))
-        self.wait(26)
+        self.wait(30)
         self.clear()
 
-        text2 = Tex(r"Let us define the ", r"Tropical Minkowski sum")
+        text2 = Tex(r"Let us define the ", r"tropical Minkowski sum")
         text2[1].set_color(LOGO_BLUE)
         
-        text3 = Tex(r"Given two sets $V, R$ of $\mathbb{R}^n_{max}$, the ", r" Tropical Minkowski sum ", r"of $V, R$ is the set").scale(0.8)
+        text3 = Tex(r"Given two sets $V, R$ of $\mathbb{R}^n_{max}$, the ", r" tropical Minkowski sum ", r"of $V, R$ is the set").scale(0.8)
         text3[1].set_color(LOGO_BLUE)
-        set1 = MathTex(r"V + R := \{x \in \mathbb{R}^n_{max} : x = v \oplus r \text{ for } v \in V, r \in R\}").scale(0.8)
+        set1 = MathTex(r"V \oplus R := \{x \in \mathbb{R}^n_{max} : x = v \oplus r \text{ for } v \in V, r \in R\}").scale(0.8)
 
         VGroup(text3, set1).arrange(DOWN)
 
-        text4 = Tex(r"Now, let us state the ", r"Tropical Minkowski-Weyl theorem")
+        text4 = Tex(r"Now, let us state the ", r"tropical Minkowski-Weyl theorem")
         text4[1].set_color(LOGO_BLUE)
 
         theorem1_1 = Tex(r"A subset $P$ of $\mathbb{R}^n_{max}$ is a ", r"tropical polyhedron ", r"iff $P = Q \oplus C$ for some").scale(0.8)
@@ -142,7 +142,7 @@ class TotalScene2(Scene):
         cone_text = Tex(r"A ", r"tropical polyhedral cone ", r"is the intersection of a finite number of ", r"tropical halfspaces").scale(0.8)
         cone_text[1].set_color(LOGO_BLUE)
         cone_text[3].set_color(LOGO_BLUE)
-        cone_math = MathTex(r"\{x \in \mathcal{R}^n_{max} | A \otimes x \leq B \otimes x \}").scale(0.8)
+        cone_math = MathTex(r"\{x \in \mathbb{R}^n_{max} | A \otimes x \leq B \otimes x \}").scale(0.8)
         cone_math[0].set_color(LOGO_BLUE)
 
         VGroup(cone_text, cone_math).arrange(DOWN)
@@ -175,7 +175,7 @@ class TotalScene2(Scene):
         
         affine_halfspace_text = Tex(r"A ", r"tropical affine halfspace ", r"is a set of vectors veriying an inequality constraint of the form").scale(0.8)
         affine_halfspace_text[1].set_color(LOGO_BLUE)
-        affine_halfspace_math = MathTex(r"\bigoplus_{1 \leq i \leq n} a_i \otimes x_i \oplus a_0 \leq \bigoplus_{1 \leq i \leq n} b_i \otimes x_i \oplus b_0").scale(0.8)
+        affine_halfspace_math = MathTex(r"\bigoplus_{1 \leq i \leq n} a_i \otimes x_i \oplus c_0 \leq \bigoplus_{1 \leq i \leq n} b_i \otimes x_i \oplus d_0").scale(0.8)
         affine_halfspace_math[0].set_color(LOGO_BLUE)
 
         VGroup(affine_halfspace_text, affine_halfspace_math).arrange(DOWN)
@@ -183,7 +183,7 @@ class TotalScene2(Scene):
         tropical_text = Tex(r"A ", r"tropical polyhedron ", r"is the intersection of a finite number of ", r"tropical affine halfspaces").scale(0.8)
         tropical_text[1].set_color(LOGO_BLUE)
         tropical_text[3].set_color(LOGO_BLUE)
-        tropical_math = MathTex(r"\{x \in \mathcal{R}^n_{max} | A \otimes x \oplus a_0 \leq B \otimes x \oplus b_0 \}")
+        tropical_math = MathTex(r"\{x \in \mathbb{R}^n_{max} | A \otimes x \oplus c \leq B \otimes x \oplus d \}")
         tropical_math[0].set_color(LOGO_BLUE)
 
         VGroup(tropical_text, tropical_math).arrange(DOWN)
@@ -201,7 +201,7 @@ class TotalScene2(Scene):
         new_position_tropical2 = tropical_math.get_center() + DOWN
         self.play(tropical_math.animate.move_to(new_position_tropical2))
         self.play(tropical_text.animate.move_to(new_position_tropical))
-        self.wait(60)
+        self.wait(55)
         self.clear()
 
         # First, Euclidean geometry
@@ -241,10 +241,20 @@ class TotalScene2(Scene):
         )
         
         # Now, onto the tropical stuff
-        title2 = Tex(r"Now, let's look at the equivalent ", r"tropical affine halfspace")
+        title2 = Tex(r"Now, let's look at the corresponding ", r"tropical affine halfspace")
         title2[1].set_color(LOGO_BLUE)
         basel2 = MathTex(r"y \geq x \oplus 1")
-        VGroup(title2, basel2).arrange(DOWN)
+        basel3 = MathTex(r"y \geq \max \{x, 1\}")
+        basel3.next_to(basel2, RIGHT, buff=1.0)
+        arrow = Arrow(basel2.get_right(), basel3.get_left(), buff=0.1)
+        
+        group = VGroup(basel2, arrow, basel3)
+        group.move_to(ORIGIN)
+        
+        title2.to_edge(LEFT).next_to(group, UP, buff=1.0)
+        
+        #VGroup(title2, basel2).arrange(DOWN)
+        #VGroup(basel2, basel3, arrow).arrange(RIGHT)
         
         transform_title2 = MathTex(r"y \geq x \oplus 1")
         transform_title2.to_corner(UP + RIGHT)
@@ -305,7 +315,10 @@ class TotalScene2(Scene):
             Write(title2),
             FadeIn(basel2, shift=UP)
         )
-        self.wait(8)
+        self.wait(4)
+        self.play(Write(arrow), Write(basel3))
+        self.wait(4)
+        self.play(FadeOut(arrow), FadeOut(basel3))
         
         self.play(
             Transform(title2, transform_title2),
@@ -338,14 +351,28 @@ class TotalScene2(Scene):
 class TotalScene3(Scene):
     def construct(self):
         # First, the linear system
-        title3 = Tex(r"We have the following linear system")
+        title3 = Tex(r"We have the following", r" tropical linear system")
+        title3[1].set_color(LOGO_BLUE)
         basel2 = MathTex(
             r"0 \leq x_1 + 2\\",
             r"x_1 \leq \max\{x_2, 0\}\\",
             r"x_1 \leq 2\\",
             r"0 \leq \max\{x_1, x_2 - 1\}"
         )
-        VGroup(title3, basel2).arrange(DOWN)
+        basel3 = MathTex(
+            r"0 \leq x_1 \otimes 2\\",
+            r"x_1 \leq x_2 \oplus 0\\",
+            r"x_1 \leq 2\\",
+            r"0 \leq x_1 \oplus x_2 \otimes (-1)\\"
+        )
+        basel3.next_to(basel2, RIGHT, buff=1.0)
+        
+        arrow = Arrow(basel2.get_right(), basel3.get_left(), buff=0.1)
+        
+        group = VGroup(basel2, arrow, basel3)
+        group.move_to(ORIGIN)
+        
+        title3.to_edge(LEFT).next_to(group, UP, buff=1.0)
         
         equation1 = MathTex(r"0 \leq x_1 + 2\\", color=BLUE, font_size = 30)
         equation2 = MathTex(r"x_1 \leq \max\{x_2, 0\}\\", color=PURPLE, font_size = 30)
@@ -457,7 +484,9 @@ class TotalScene3(Scene):
             Write(title3),
             FadeIn(basel2, shift=UP),
         )
+        self.play(Write(arrow), Write(basel3))
         self.wait(18)
+        self.play(FadeOut(arrow), FadeOut(basel3))
         
         # Moving the halfspace on the top left corner
         self.play(
@@ -543,7 +572,7 @@ class TotalScene3(Scene):
         vector.set_color(LOGO_GREEN)
         
         self.play(FadeIn(inequality5), FadeIn(inequality6_1), FadeIn(inequality6_2))
-        self.wait(3)
+        self.wait(5)
         self.play(FadeOut(inequality5), FadeOut(inequality6_1), FadeOut(inequality6_2))
         self.wait(2)
         
