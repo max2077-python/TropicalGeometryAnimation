@@ -354,16 +354,16 @@ class TotalScene3(Scene):
         title3 = Tex(r"We have the following", r" tropical linear system")
         title3[1].set_color(LOGO_BLUE)
         basel2 = MathTex(
-            r"0 \leq x_1 + 2\\",
-            r"x_1 \leq \max\{x_2, 0\}\\",
-            r"x_1 \leq 2\\",
-            r"0 \leq \max\{x_1, x_2 - 1\}"
-        )
-        basel3 = MathTex(
             r"0 \leq x_1 \otimes 2\\",
             r"x_1 \leq x_2 \oplus 0\\",
             r"x_1 \leq 2\\",
             r"0 \leq x_1 \oplus x_2 \otimes (-1)\\"
+        )
+        basel3 = MathTex(
+            r"0 \leq x_1 + 2\\",
+            r"x_1 \leq \max\{x_2, 0\}\\",
+            r"x_1 \leq 2\\",
+            r"0 \leq \max\{x_1, x_2 - 1\}"
         )
         basel3.next_to(basel2, RIGHT, buff=1.0)
         
