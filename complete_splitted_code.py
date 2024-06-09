@@ -517,9 +517,10 @@ class TotalScene3(Scene):
         self.wait()
         
         self.play(Write(inequality2_1), Write(inequality2_2))
+        self.wait(7)
         self.play(Write(real_inequality2_1), Write(real_inequality2_2), Uncreate(inequality2_1), Uncreate(inequality2_2))
         self.play(FadeIn(halfspace4))
-        self.wait(16)
+        self.wait(9)
         self.play(FadeOut(halfspace4))
         self.wait()
         
@@ -530,9 +531,10 @@ class TotalScene3(Scene):
         self.wait()
         
         self.play(Write(inequality4_1), Write(inequality4_2))
+        self.wait(7)
         self.play(Write(real_inequality4_1), Write(real_inequality4_2), Uncreate(inequality4_1), Uncreate(inequality4_2))
         self.play(FadeIn(halfspace6))
-        self.wait(16)
+        self.wait(9)
         self.play(FadeOut(halfspace6))
         
         self.play(
