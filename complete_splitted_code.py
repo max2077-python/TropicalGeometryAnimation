@@ -426,6 +426,11 @@ class TotalScene3(Scene):
             stroke_width=0
         )
         
+        real_inequality2_1 = Line([0, 0, 1], [0, -8, 1])
+        real_inequality2_2 = Line([0, 0, 1], [8, 8, 1])
+        real_inequality2_1.set_color(PURPLE)
+        real_inequality2_2.set_color(PURPLE)
+        
         inequality3 = Line([2, -10, 1], [2, 10, 1])
         inequality3.set_color(YELLOW)
         halfspace5 = Polygon(
@@ -454,6 +459,11 @@ class TotalScene3(Scene):
             fill_opacity=0.35,
             stroke_width=0
         )
+        
+        real_inequality4_1 = Line([-8, 1, 1], [0, 1, 1])
+        real_inequality4_2 = Line([0, 1, 1], [0, -8, 1])
+        real_inequality4_1.set_color(GREEN)
+        real_inequality4_2.set_color(GREEN)
         
         polyhedron = Polygon(
             grid1.coords_to_point(-2, 1),
@@ -507,6 +517,7 @@ class TotalScene3(Scene):
         self.wait()
         
         self.play(Write(inequality2_1), Write(inequality2_2))
+        self.play(Write(real_inequality2_1), Write(real_inequality2_2), Uncreate(inequality2_1), Uncreate(inequality2_2))
         self.play(FadeIn(halfspace4))
         self.wait(16)
         self.play(FadeOut(halfspace4))
@@ -519,6 +530,7 @@ class TotalScene3(Scene):
         self.wait()
         
         self.play(Write(inequality4_1), Write(inequality4_2))
+        self.play(Write(real_inequality4_1), Write(real_inequality4_2), Uncreate(inequality4_1), Uncreate(inequality4_2))
         self.play(FadeIn(halfspace6))
         self.wait(16)
         self.play(FadeOut(halfspace6))
@@ -532,11 +544,11 @@ class TotalScene3(Scene):
         )
         self.play(
             FadeOut(inequality1),
-            FadeOut(inequality2_1),
-            FadeOut(inequality2_2),
+            FadeOut(real_inequality2_1),
+            FadeOut(real_inequality2_2),
             FadeOut(inequality3),
-            FadeOut(inequality4_1),
-            FadeOut(inequality4_2)
+            FadeOut(real_inequality4_1),
+            FadeOut(real_inequality4_2)
         )
         self.play(FadeIn(polyhedron))
         self.wait(30)
